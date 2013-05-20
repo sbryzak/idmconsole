@@ -5,7 +5,7 @@
     <xw:event type="onFire"><xw:action type="script">xw.closePopup();</xw:action></xw:event>
   </xw:eventObserver>
   
-  <div style="float:left;width:49%;height:220px;border-right: 1px solid #aaaaaa">
+  <div style="float:left;width:300px;height:220px">
     <p>
       Please log in:
     </p>
