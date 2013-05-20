@@ -8,28 +8,26 @@
     <link href='http://fonts.googleapis.com/css?family=Puritan' rel='stylesheet' type='text/css'>
     <link REL="SHORTCUT ICON" HREF="/favicon.ico"/>
   </head>
+
   <body>
     <div id="container">
       <div id="header">
         <div id="logo"></div>
+        <div id="headerMenu"></div>
+        <div id="menu"></div>
       </div>
       
-      <div id="content">
-        <div id="menu">
-        
-        </div>
-      
-        <div id="main">
-
-        </div>
-      </div>
+      <div id="content"></div>
     </div>
-    
   </body>  
   
-  <script src="xwidgets/xw.js"></script>      
-  <script type="text/javascript">           
+  <script src="xwidgets/xw.js"></script>
+
+  <script type="text/javascript">         
+    xw.open("dm_main.xw"); 
     xw.open("menu.xw", null, "menu");
+    xw.open("home.xw", null, "content");
+    xw.open("header.xw", null, "headerMenu");
   </script>
   
 </html>
