@@ -21,6 +21,7 @@
 	
     <properties>
   		<version.jboss.bom>1.0.7.CR1</version.jboss.bom>
+  		<version.xwidgets>1.0-SNAPSHOT</version.xwidgets>
     </properties>
     
     <dependencyManagement>
@@ -49,6 +50,12 @@
       <dependency>
         <groupId>javax.enterprise</groupId>
         <artifactId>cdi-api</artifactId>
+      </dependency>
+      
+      <dependency>
+        <groupId>org.xwidgets</groupId>
+        <artifactId>xwidgets</artifactId>
+        <version>${version.xwidgets}</version>
       </dependency>
 
     </dependencies>
