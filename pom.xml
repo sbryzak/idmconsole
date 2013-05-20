@@ -20,6 +20,11 @@
     </licenses>
 	
     <properties>
+      <maven.compiler.target>1.6</maven.compiler.target>
+      <maven.compiler.source>1.6</maven.compiler.source>
+      <version.compiler.plugin>2.3.1</version.compiler.plugin>
+      <version.war.plugin>2.1.1</version.war.plugin>
+      <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
   		<version.jboss.bom>1.0.7.CR1</version.jboss.bom>
   		<version.xwidgets>1.0-SNAPSHOT</version.xwidgets>
     </properties>
@@ -59,5 +64,35 @@
       </dependency>
 
     </dependencies>
+
+    <build>
+        <!-- Set the name of the war, used as the context root when the app 
+            is deployed -->
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.war.plugin}</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.maven.plugin}</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${version.compiler.plugin}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
