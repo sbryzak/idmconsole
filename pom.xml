@@ -8,7 +8,6 @@
 
     <packaging>war</packaging>
 
-
     <name>Identity Management Console for PicketLink</name>
 
     <licenses>
@@ -66,8 +65,6 @@
     </dependencies>
 
     <build>
-        <!-- Set the name of the war, used as the context root when the app 
-            is deployed -->
         <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
