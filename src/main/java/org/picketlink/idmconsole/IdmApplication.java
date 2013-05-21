@@ -44,4 +44,12 @@ public class IdmApplication {
             return "{\"success\":false}";
         }
     }
+
+    @POST
+    @Path("/logout")
+    @Produces({"application/json"})
+    public String logout() {
+        identity.logout();
+        return "{\"success\":true}";
+    }
 }

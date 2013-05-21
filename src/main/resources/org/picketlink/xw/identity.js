@@ -2,9 +2,10 @@ package("org.picketlink.xw");
 
 org.picketlink.xw.Identity = function() {
   xw.NonVisual.call(this);
+  this._className = "org.picketlink.xw.Identity";
   
+  this.registerProperty("endPoint", "");
   this.loggedIn = false;
-  this.endPoint = null;
   this.attribs = {};
 };
 
@@ -37,11 +38,27 @@ org.picketlink.xw.Identity.prototype.login = function(username, password) {
 
 org.picketlink.xw.Identity.prototype.logout = function() {
   var that = this;
+  
   var cb = function() { 
     that.loggedIn = false;
     xw.EL.notify("identity");
   };
-  this.identityBean.logout(cb);
+  
+  var req = xw.Sys.createHttpRequest("text/plain");
+  
+  req.onreadystatechange = function() {
+    if (req.readyState === 4) {
+      if (req.status === 200 || req.status === 0) {
+        var ret = eval ('('+req.responseText+')');
+        cb(ret);
+      } else if (req.status === 404) {
+        window.alert("404 error: the identity service could not be found.");
+      }
+    }  
+  }
+    
+  req.open("POST", this.endPoint + "/logout", true);
+  req.send(null);
 };
 
 org.picketlink.xw.Identity.prototype.loginCallback = function(result) {
