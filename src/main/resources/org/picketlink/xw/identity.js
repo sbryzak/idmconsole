@@ -4,6 +4,7 @@ org.picketlink.xw.Identity = function() {
   xw.NonVisual.call(this);
   
   this.loggedIn = false;
+  this.endPoint = null;
   this.attribs = {};
 };
 
@@ -15,8 +16,23 @@ org.picketlink.xw.Identity.prototype.open = function() {
 
 org.picketlink.xw.Identity.prototype.login = function(username, password) {
   var that = this;
-  var cb = function(r) { that.loginCallback(r); };
-  this.identityBean.login(username, password, cb);
+  var cb = function(r) { that.loginCallback(r); }; 
+  
+  var req = xw.Sys.createHttpRequest("text/plain");
+  
+  req.onreadystatechange = function() {
+    if (req.readyState === 4) {
+      if (req.status === 200 || req.status === 0) {
+        var ret = eval ('('+req.responseText+')');
+        cb(ret);
+      } else if (req.status === 404) {
+        window.alert("404 error: the identity service could not be found.");
+      }
+    }  
+  }
+    
+  req.open("POST", this.endPoint + "/login/" + username + "/" + password, true);
+  req.send(null);
 };
 
 org.picketlink.xw.Identity.prototype.logout = function() {
@@ -32,8 +48,8 @@ org.picketlink.xw.Identity.prototype.loginCallback = function(result) {
   if (result.success) {
     this.loggedIn = true;
         
-    this.attribs.firstName = result.getAttributes().get("firstName");
-    this.attribs.lastName = result.getAttributes().get("lastName");
+//    this.attribs.firstName = result.getAttributes().get("firstName");
+//    this.attribs.lastName = result.getAttributes().get("lastName");
     
     xw.EL.notify("identity");
     xw.Event.fire("org.picketlink.identity.loggedIn");
