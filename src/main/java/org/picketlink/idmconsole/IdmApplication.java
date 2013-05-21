@@ -22,7 +22,7 @@ public class IdmApplication {
     @Path("/status")
     @Produces({"application/json"})
     public String getStatus() {
-        return "{\"loggedIn\":\"" + (identity.isLoggedIn() ? "true" : "false") + "\"}";
+        return "{\"loggedIn\":" + (identity.isLoggedIn() ? "true" : "false") + "}";
     }
 
     @POST
@@ -32,6 +32,6 @@ public class IdmApplication {
         credentials.setUserId(username);
         credentials.setPassword(password);
         AuthenticationResult result = identity.login();
-        return "{\"success\":\"" + (result.equals(AuthenticationResult.SUCCESS) ? "true" : "false") + "\"}";
+        return "{\"success\":" + (result.equals(AuthenticationResult.SUCCESS) ? "true" : "false") + "}";
     }
 }

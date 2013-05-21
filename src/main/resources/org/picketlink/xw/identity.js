@@ -23,6 +23,7 @@ org.picketlink.xw.Identity.prototype.login = function(username, password) {
   req.onreadystatechange = function() {
     if (req.readyState === 4) {
       if (req.status === 200 || req.status === 0) {
+        alert("Got response: " + req.responseText);
         var ret = eval ('('+req.responseText+')');
         cb(ret);
       } else if (req.status === 404) {
