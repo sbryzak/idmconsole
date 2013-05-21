@@ -49,8 +49,8 @@ org.picketlink.xw.Identity.prototype.loginCallback = function(result) {
   if (result.success) {
     this.loggedIn = true;
         
-//    this.attribs.firstName = result.getAttributes().get("firstName");
-//    this.attribs.lastName = result.getAttributes().get("lastName");
+    this.attribs.firstName = result.firstName;
+    this.attribs.lastName = result.lastName;
     
     xw.EL.notify("identity");
     xw.Event.fire("org.picketlink.identity.loggedIn");

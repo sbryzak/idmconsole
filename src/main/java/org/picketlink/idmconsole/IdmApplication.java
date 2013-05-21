@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import org.picketlink.Identity;
 import org.picketlink.Identity.AuthenticationResult;
 import org.picketlink.credential.DefaultLoginCredentials;
+import org.picketlink.idm.model.User;
 
 @Path("/identity")
 public class IdmApplication {
@@ -31,7 +32,16 @@ public class IdmApplication {
     public String login(@PathParam("username") String username, @PathParam("password") String password) {
         credentials.setUserId(username);
         credentials.setPassword(password);
-        AuthenticationResult result = identity.login();
-        return "{\"success\":" + (result.equals(AuthenticationResult.SUCCESS) ? "true" : "false") + "}";
+
+        if (AuthenticationResult.SUCCESS.equals(identity.login())) {
+            User user = (User) identity.getUser();
+
+            return "{\"success\":true," + 
+            		"\"firstName\":\"" + user.getFirstName() + "\"," + 
+            		"\"lastName\":\"" + user.getLastName() + "\"" +
+            		"}";
+        } else {
+            return "{\"success\":false}";
+        }
     }
 }
