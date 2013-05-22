@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xw:view xmlns="http://www.w3.org/1999/xhtml" xmlns:xw="http://xwidgets.org/core">
-  <xw:link styleClass="menu" caption="learn"/> 
-  
-  <xw:link styleClass="menu" caption="about">
-    <xw:event type="onclick">
-      <xw:action type="script">xw.open("share.xw", null, "main")</xw:action>
-    </xw:event>
-  </xw:link>  
-  
-  <xw:link styleClass="menu" caption="settings"/>
+  <xw:fragment rendered="#{identity.loggedIn}">
+    <xw:link styleClass="menu" caption="realms"/> 
+
+    <xw:link styleClass="menu" caption="users"/> 
+    
+    <xw:link styleClass="menu" caption="groups">
+      <xw:event type="onclick">
+        <xw:action type="script">xw.open("share.xw", null, "main")</xw:action>
+      </xw:event>
+    </xw:link>  
+    
+    <xw:link styleClass="menu" caption="roles"/>
+    
+    <xw:link styleClass="menu" caption="search"/>
+  </xw:fragment>
 </xw:view>
